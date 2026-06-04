@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // RUNTIME VELOCITY CONFIGURATIONS (Adjust in milliseconds to match file duration)
+    // RUNTIME VELOCITY CONFIGURATIONS
     const BUBBLE_GIF_DURATION = 2500; 
-    const DOOR_GIF_DURATION = 1500;   
+    const DOOR_GIF_DURATION = 1000;   // 🌟 CHANGED: Explicitly set to 1000ms (1 second)
 
     // INTERFACE CAPTURE DOM OBJECTS
     const startScreen = document.getElementById('start-screen');
@@ -22,74 +22,62 @@ document.addEventListener("DOMContentLoaded", function() {
     const audioCreak = document.getElementById('audio-creak');
     const audioDramatic = document.getElementById('audio-dramatic');
 
-    // Make sure bubble container is hidden at absolute load so it doesn't leak through white screen
+    // Hide bubble container at raw initial load
     bubbleContainer.style.display = 'none';
 
     // ==========================================
     // ACTION INITIALIZER: CLICK ENTER
     // ==========================================
     startBtn.addEventListener('click', function() {
-        // 1. Drop the white curtain screen instantly.
-        // The island is already standing perfectly still beneath it!
         startScreen.style.display = 'none';
-        
-        // 2. Turn on the bubble overlay container right away over the static island
+        exteriorView.classList.remove('hidden'); 
         bubbleContainer.style.display = 'flex';
         
-        // 3. Play bubble audio sound effect
         audioBubble.play();
+        bubbleGif.src = bubbleGif.src; // Frame 0 reset
 
-        // 4. Flush frame caching loops to start GIF processing on absolute frame 0
-        bubbleGif.src = bubbleGif.src; 
-
-        // 5. Wait for bubble animation runtime to conclude
         setTimeout(function() {
-            // Fade out ONLY the bubble overlay container over 1 second smoothly
             bubbleContainer.classList.add('fade-out');
 
             setTimeout(function() {
-                // Completely hide bubble code when transparency animation concludes
                 bubbleContainer.style.display = 'none';
-                
-                // Spin up background audio tracks safely
                 audioSeaweed.volume = 0.4;
                 audioSeaweed.play().catch(e => console.log("Ambient audio lock caught:", e));
-            }, 1000); // Matches the 1.0s .fade-out CSS duration
+            }, 1000); 
 
         }, BUBBLE_GIF_DURATION);
     });
 
     // ==========================================
-    // INTERACTIVE NODE MAPPING: EXTERIOR TO INTERNAL
+    // INTERACTIVE NODE MAPPING: DOOR CLICK
     // ==========================================
     clickableDoor.addEventListener('click', function(event) {
         event.preventDefault(); 
 
-        // Flush active background ambient channels out of operational cache
+        // Stop background ambient loop tracks
         audioSeaweed.pause();
         audioSeaweed.currentTime = 0;
 
-        // Fire mechanical action door creak track
+        // 1. Play the door creak track (1 second sound effect)
         audioCreak.play();
-        doorGif.src = doorGif.src; // Flush transition frames straight to Frame 1
+        doorGif.src = doorGif.src; // Frame 0 reset
 
-        // Drop background layer elements out of current display pipeline
+        // 2. Instantly jump from exterior view to interior view
         exteriorView.classList.add('hidden');
+        interiorView.classList.remove('hidden');
+        
+        // 3. Unhide the door opening GIF overlay inside the bedroom scene
         doorOverlay.classList.remove('hidden');
 
-        // Watch cutscene animation sequence limit bounds
+        // 4. Wait exactly 1 second (matching the SFX and GIF timeline limits)
         setTimeout(function() {
-            // Cut overlay layer blocks
-            doorOverlay.classList.add('hidden');
+            // Remove the door animation layer completely
+            doorOverlay.style.display = 'none';
             
-            // Present bedroom array layout configuration frame structures
-            interiorView.classList.remove('hidden');
-            interiorView.classList.add('fade-in');
-
-            // Fire musical hit frame audio stings
+            // Trigger the dramatic impact sting sound
             audioDramatic.play();
             
-            // Uncover the localized header block styling profiles
+            // Pop the red "COME HERE" text overlay into view
             interiorText.classList.add('show');
 
         }, DOOR_GIF_DURATION);
