@@ -86,14 +86,13 @@ body, html {
     align-items: center;
     z-index: 10; 
     pointer-events: none; /* Let clicks pass straight through the bubbles to the door */
+    opacity: 1;
 }
 
 #bubble-gif {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    
-    /* 🌟 THE BLACK BACKGROUND FIX 🌟 */
     mix-blend-mode: screen; /* Drops the black background entirely, keeping the bubbles */
 }
 
