@@ -49,7 +49,7 @@ body, html {
 }
 
 #start-btn {
-    font-family: 'Special Gothic Condensed One';
+    font-family: 'Special Gothic Condensed One', Arial, sans-serif;
     font-size: 5rem;
     padding: 12px 40px;
     color: #ffffff;
@@ -71,6 +71,8 @@ body, html {
    ========================================== */
 #exterior-view {
     background-image: url('./image_24f23d.png');
+    background-size: cover;
+    background-position: center;
     z-index: 1; 
 }
 
@@ -86,7 +88,6 @@ body, html {
     align-items: center;
     z-index: 10; 
     pointer-events: none;
-    opacity: 1;
 }
 
 #bubble-gif {
@@ -104,7 +105,7 @@ body, html {
     height: 38%;
     background-color: transparent;
     z-index: 50; 
-    cursor: default; 
+    cursor: pointer; 
     outline: none;
 }
 
@@ -117,28 +118,31 @@ body, html {
    ========================================== */
 #interior-view {
     background-image: url('./image_241cfb.jpg');
+    background-size: cover;
+    background-position: center;
     z-index: 5;
 }
 
-/* 🌟 NEW: DOOR OPENING OVERLAY OVER THE BEDROOM 🌟 */
+/* DOOR OPENING OVERLAY OVER THE BEDROOM */
 #door-transition-overlay {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: transparent !important; /* See-through to the bedroom */
+    background-color: transparent !important;
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 20; /* Sits over bedroom but under text */
+    z-index: 20;
+    pointer-events: none;
 }
 
 #door-gif {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    mix-blend-mode: screen; /* Drops black background so bedroom peeks through */
+    mix-blend-mode: screen;
 }
 
 #interior-text {
