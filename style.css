@@ -1,0 +1,192 @@
+/* RESET & BASE STYLES */
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden; /* Lock viewport from accidental scrolling */
+    background-color: #000; /* Deep backdrop fall-back */
+    font-family: Arial, sans-serif;
+}
+
+/* GLOBAL UTILITY CLASSES */
+.hidden {
+    display: none !important;
+}
+
+.fade-in {
+    animation: canvasFadeIn 1.5s ease-out forwards;
+}
+
+.fade-out {
+    animation: canvasFadeOut 1.2s ease-in forwards;
+}
+
+.main-container {
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+/* ==========================================
+   PHASE 1: INTRO AND BUBBLE SYSTEM
+   ========================================== */
+#intro-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+}
+
+#start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    z-index: 1010;
+}
+
+#start-btn {
+    font-family: 'Jolly Lodger', cursive;
+    font-size: 3.5rem;
+    padding: 12px 40px;
+    color: #ffffff;
+    background-color: #00a2ff;
+    border: 4px solid #0044aa;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.25);
+    transition: transform 0.15s ease, background-color 0.15s ease;
+}
+
+#start-btn:hover {
+    transform: scale(1.08);
+    background-color: #0088ee;
+}
+
+#bubble-gif-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1005;
+}
+
+#bubble-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==========================================
+   PHASE 2: EXTERIOR ISLAND VIEW
+   ========================================== */
+#exterior-view {
+    background-image: url('./image_24f23d.png');
+}
+
+/* Invisible box overlaying the graphical coordinates of the structural door */
+#clickable-door {
+    position: absolute;
+    top: 25%;
+    left: 33%;
+    width: 13%;
+    height: 38%;
+    background-color: transparent;
+    z-index: 50;
+    cursor: default; /* Keeps it strictly normal until explicit hover action */
+    outline: none;
+}
+
+#clickable-door:hover {
+    cursor: pointer; /* Reveals clickability solely via the pointer changing style */
+}
+
+/* ==========================================
+   PHASE 2.5: THE DOOR OPENING FILM STRIP
+   ========================================== */
+#door-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 500;
+    background-color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#door-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ==========================================
+   PHASE 3: INTERIOR SCENE WITH TEXT POP
+   ========================================== */
+#interior-view {
+    background-image: url('./image_241cfb.jpg');
+}
+
+#interior-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.3);
+    font-family: 'Jolly Lodger', cursive;
+    color: #ff0000;
+    font-size: 9rem;
+    font-weight: bold;
+    text-align: center;
+    letter-spacing: 2px;
+    text-shadow: 4px 4px 0px #000000, -2px -2px 0px #000000, 2px -2px 0px #000000, -2px 2px 0px #000000;
+    opacity: 0;
+    z-index: 60;
+    pointer-events: none; /* Make sure user cannot interact or right click text blocks */
+}
+
+#interior-text.show {
+    animation: dramaticTextPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation-delay: 0.2s; /* Tiny padding window following audio strike */
+}
+
+/* ==========================================
+   KEYFRAME ENGINE
+   ========================================== */
+@keyframes canvasFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes canvasFadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes dramaticTextPop {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.3);
+    }
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1.0);
+    }
+}

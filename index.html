@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpongeBob SquarePants Interactive Experience</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Jolly+Lodger&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="intro-overlay">
+        <div id="start-screen">
+            <button id="start-btn">ENTER</button>
+        </div>
+        
+        <div id="bubble-gif-container" class="hidden">
+            <img src="./image_24e6d6.gif" id="bubble-gif" alt="Bubbles rising">
+        </div>
+    </div>
+
+    <div id="exterior-view" class="main-container hidden">
+        <a href="#" id="clickable-door" aria-label="Enter the building"></a>
+    </div>
+
+    <div id="door-transition-overlay" class="hidden">
+        <img src="./door_opening.gif" id="door-gif" alt="The door swings open">
+    </div>
+
+    <div id="interior-view" class="main-container hidden">
+        <div id="interior-text">COME HERE</div>
+    </div>
+
+    <audio id="audio-bubble" src="audio/bubble_sfx.mp3" preload="auto"></audio>
+    <audio id="audio-seaweed" src="audio/seaweed_bg.mp3" preload="auto" loop></audio>
+    <audio id="audio-creak" src="audio/door_creak.mp3" preload="auto"></audio>
+    <audio id="audio-dramatic" src="audio/dramatic_impact.mp3" preload="auto"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
