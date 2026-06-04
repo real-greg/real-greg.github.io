@@ -1,25 +1,25 @@
-/* RESET & BASE STYLES */
+/* VIEWPORT INITIALIZATION & RESET */
 body, html {
     margin: 0;
     padding: 0;
     width: 100vw;
     height: 100vh;
-    overflow: hidden; /* Lock viewport from accidental scrolling */
-    background-color: #000; /* Deep backdrop fall-back */
+    overflow: hidden; /* Lock interface scrolling completely */
+    background-color: #000000;
     font-family: Arial, sans-serif;
 }
 
-/* GLOBAL UTILITY CLASSES */
+/* MASTER UTILITY SCHEMAS */
 .hidden {
     display: none !important;
 }
 
 .fade-in {
-    animation: canvasFadeIn 1.5s ease-out forwards;
+    animation: sceneFadeIn 1.5s ease-out forwards;
 }
 
 .fade-out {
-    animation: canvasFadeOut 1.2s ease-in forwards;
+    animation: sceneFadeOut 1.2s ease-in forwards;
 }
 
 .main-container {
@@ -27,11 +27,13 @@ body, html {
     height: 100vh;
     background-size: cover;
     background-position: center;
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 /* ==========================================
-   PHASE 1: INTRO AND BUBBLE SYSTEM
+   PHASE 1: GATEWAY & TRANSPARENT BUBBLE STACK
    ========================================== */
 #intro-overlay {
     position: fixed;
@@ -40,10 +42,11 @@ body, html {
     width: 100vw;
     height: 100vh;
     z-index: 1000;
+    pointer-events: none; /* Prevents overlay layers from blocking click hooks underneath */
 }
 
 #start-screen {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -51,8 +54,9 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff;
+    background-color: #ffffff; /* Blocks the background view until user interacts */
     z-index: 1010;
+    pointer-events: auto;
 }
 
 #start-btn {
@@ -79,7 +83,7 @@ body, html {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #ffffff;
+    background-color: transparent; /* Allows island background image to show beneath */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -93,13 +97,13 @@ body, html {
 }
 
 /* ==========================================
-   PHASE 2: EXTERIOR ISLAND VIEW
+   PHASE 2: EXTERIOR ISLAND CONFIGURATION
    ========================================== */
 #exterior-view {
     background-image: url('./image_24f23d.png');
+    z-index: 1; 
 }
 
-/* Invisible box overlaying the graphical coordinates of the structural door */
 #clickable-door {
     position: absolute;
     top: 25%;
@@ -108,16 +112,16 @@ body, html {
     height: 38%;
     background-color: transparent;
     z-index: 50;
-    cursor: default; /* Keeps it strictly normal until explicit hover action */
+    cursor: default; /* Visually static element by default */
     outline: none;
 }
 
 #clickable-door:hover {
-    cursor: pointer; /* Reveals clickability solely via the pointer changing style */
+    cursor: pointer; /* Indication changes solely via native OS pointer swap */
 }
 
 /* ==========================================
-   PHASE 2.5: THE DOOR OPENING FILM STRIP
+   PHASE 2.5: TRANSITION CARD OVERLAY
    ========================================== */
 #door-transition-overlay {
     position: fixed;
@@ -139,10 +143,11 @@ body, html {
 }
 
 /* ==========================================
-   PHASE 3: INTERIOR SCENE WITH TEXT POP
+   PHASE 3: BEDROOM & RENDERING RULES
    ========================================== */
 #interior-view {
     background-image: url('./image_241cfb.jpg');
+    z-index: 5;
 }
 
 #interior-text {
@@ -159,28 +164,28 @@ body, html {
     text-shadow: 4px 4px 0px #000000, -2px -2px 0px #000000, 2px -2px 0px #000000, -2px 2px 0px #000000;
     opacity: 0;
     z-index: 60;
-    pointer-events: none; /* Make sure user cannot interact or right click text blocks */
+    pointer-events: none;
 }
 
 #interior-text.show {
-    animation: dramaticTextPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    animation-delay: 0.2s; /* Tiny padding window following audio strike */
+    animation: textImpactPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    animation-delay: 0.2s;
 }
 
 /* ==========================================
-   KEYFRAME ENGINE
+   ANIMATION KEYFRAME ROUTINES
    ========================================== */
-@keyframes canvasFadeIn {
+@keyframes sceneFadeIn {
     from { opacity: 0; }
     to { opacity: 1; }
 }
 
-@keyframes canvasFadeOut {
+@keyframes sceneFadeOut {
     from { opacity: 1; }
     to { opacity: 0; }
 }
 
-@keyframes dramaticTextPop {
+@keyframes textImpactPop {
     0% {
         opacity: 0;
         transform: translate(-50%, -50%) scale(0.3);
