@@ -4,7 +4,7 @@ body, html {
     padding: 0;
     width: 100vw;
     height: 100vh;
-    overflow: hidden; /* Lock interface scrolling completely */
+    overflow: hidden; 
     background-color: #000000;
     font-family: Arial, sans-serif;
 }
@@ -19,7 +19,7 @@ body, html {
 }
 
 .fade-out {
-    animation: sceneFadeOut 1.2s ease-in forwards;
+    animation: bubbleFadeOut 1.0s ease-in forwards;
 }
 
 .main-container {
@@ -33,18 +33,8 @@ body, html {
 }
 
 /* ==========================================
-   PHASE 1: GATEWAY & TRANSPARENT BUBBLE STACK
+   PHASE 1: GATEWAY CLICK SCREEN
    ========================================== */
-#intro-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 1000;
-    pointer-events: none; /* Prevents overlay layers from blocking click hooks underneath */
-}
-
 #start-screen {
     position: fixed;
     top: 0;
@@ -54,9 +44,8 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff; /* Blocks the background view until user interacts */
+    background-color: #ffffff; 
     z-index: 1010;
-    pointer-events: auto;
 }
 
 #start-btn {
@@ -77,32 +66,35 @@ body, html {
     background-color: #0088ee;
 }
 
+/* ==========================================
+   PHASE 2: EXTERIOR ISLAND & BUBBLE LAYER
+   ========================================== */
+#exterior-view {
+    background-image: url('./image_24f23d.png');
+    z-index: 1; 
+}
+
 #bubble-gif-container {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: transparent !important; /* Forces transparency */
+    background-color: transparent !important; 
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1005;
+    z-index: 10; 
+    pointer-events: none; /* Let clicks pass straight through the bubbles to the door */
 }
 
 #bubble-gif {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    mix-blend-mode: screen;  
-}
-
-/* ==========================================
-   PHASE 2: EXTERIOR ISLAND CONFIGURATION
-   ========================================== */
-#exterior-view {
-    background-image: url('./image_24f23d.png');
-    z-index: 1; 
+    
+    /* 🌟 THE BLACK BACKGROUND FIX 🌟 */
+    mix-blend-mode: screen; /* Drops the black background entirely, keeping the bubbles */
 }
 
 #clickable-door {
@@ -112,13 +104,13 @@ body, html {
     width: 13%;
     height: 38%;
     background-color: transparent;
-    z-index: 50;
-    cursor: default; /* Visually static element by default */
+    z-index: 50; /* Stays above the bubbles so it can always be clicked */
+    cursor: default; 
     outline: none;
 }
 
 #clickable-door:hover {
-    cursor: pointer; /* Indication changes solely via native OS pointer swap */
+    cursor: pointer; 
 }
 
 /* ==========================================
@@ -181,7 +173,7 @@ body, html {
     to { opacity: 1; }
 }
 
-@keyframes sceneFadeOut {
+@keyframes bubbleFadeOut {
     from { opacity: 1; }
     to { opacity: 0; }
 }
