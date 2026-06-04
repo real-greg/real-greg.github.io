@@ -85,7 +85,7 @@ body, html {
     justify-content: center;
     align-items: center;
     z-index: 10; 
-    pointer-events: none; /* Let clicks pass straight through the bubbles to the door */
+    pointer-events: none;
     opacity: 1;
 }
 
@@ -93,7 +93,7 @@ body, html {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    mix-blend-mode: screen; /* Drops the black background entirely, keeping the bubbles */
+    mix-blend-mode: screen; /* Drops black background */
 }
 
 #clickable-door {
@@ -103,7 +103,7 @@ body, html {
     width: 13%;
     height: 38%;
     background-color: transparent;
-    z-index: 50; /* Stays above the bubbles so it can always be clicked */
+    z-index: 50; 
     cursor: default; 
     outline: none;
 }
@@ -113,33 +113,32 @@ body, html {
 }
 
 /* ==========================================
-   PHASE 2.5: TRANSITION CARD OVERLAY
+   PHASE 3: BEDROOM & RENDERING RULES
    ========================================== */
+#interior-view {
+    background-image: url('./image_241cfb.jpg');
+    z-index: 5;
+}
+
+/* 🌟 NEW: DOOR OPENING OVERLAY OVER THE BEDROOM 🌟 */
 #door-transition-overlay {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: 500;
-    background-color: #000000;
+    width: 100%;
+    height: 100%;
+    background-color: transparent !important; /* See-through to the bedroom */
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 20; /* Sits over bedroom but under text */
 }
 
 #door-gif {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
-
-/* ==========================================
-   PHASE 3: BEDROOM & RENDERING RULES
-   ========================================== */
-#interior-view {
-    background-image: url('./image_241cfb.jpg');
-    z-index: 5;
+    mix-blend-mode: screen; /* Drops black background so bedroom peeks through */
 }
 
 #interior-text {
@@ -161,7 +160,7 @@ body, html {
 
 #interior-text.show {
     animation: textImpactPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    animation-delay: 0.2s;
+    animation-delay: 0.1s;
 }
 
 /* ==========================================
