@@ -1,9 +1,9 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // TIMING VARIABLES (Adjust these paths to match your custom GIF runtimes in milliseconds)
+    // RUNTIME VELOCITY CONFIGURATIONS (Adjust in milliseconds to match file duration)
     const BUBBLE_GIF_DURATION = 2500; 
     const DOOR_GIF_DURATION = 1500;   
 
-    // DOM CANVAS SELECTORS
+    // INTERFACE CAPTURE DOM OBJECTS
     const startScreen = document.getElementById('start-screen');
     const startBtn = document.getElementById('start-btn');
     const bubbleContainer = document.getElementById('bubble-gif-container');
@@ -17,71 +17,77 @@ document.addEventListener("DOMContentLoaded", function() {
     const clickableDoor = document.getElementById('clickable-door');
     const interiorText = document.getElementById('interior-text');
 
-    // DOM AUDIO SELECTORS
+    // NATIVE HARDWARE CONTROLLERS
     const audioBubble = document.getElementById('audio-bubble');
     const audioSeaweed = document.getElementById('audio-seaweed');
     const audioCreak = document.getElementById('audio-creak');
     const audioDramatic = document.getElementById('audio-dramatic');
 
     // ==========================================
-    // INITIALIZATION GATEWAY: CLICK ENTER
+    // ACTION INITIALIZER: TAP TO COMPLY WITH SECURITY
     // ==========================================
     startBtn.addEventListener('click', function() {
-        // Clear landing block and unlock media render engine
+        // Drop the curtain screen
         startScreen.style.display = 'none';
+        
+        // REVEAL BOTH SIMULTANEOUSLY: Island image background + transparent bubble GIF canvas on top
+        exteriorView.classList.remove('hidden'); 
         bubbleContainer.classList.remove('hidden');
         
-        // Synchronize bubble sound track with canvas flip
+        // Wake sound layer instantly synced to bubble visual layout
         audioBubble.play();
 
-        // Refresh source location parameters to anchor loop cycles cleanly to Frame 1
+        // Flush frame caching loops to start GIF processing on absolute frame 0
         bubbleGif.src = bubbleGif.src; 
 
-        // Execute transition array after the bubble animation sequence wraps up
+        // Monitor run cycle to drop bubbles when asset timeline wraps up
         setTimeout(function() {
+            // Initiate fade out pipeline matching layout variables
             introOverlay.classList.add('fade-out');
-            exteriorView.classList.remove('hidden');
-            exteriorView.classList.add('fade-in');
 
-            // Wipe out overlay resources completely post-fade timeline matching CSS 1.2s rule
+            // Purge layer nodes to establish runtime memory management
             setTimeout(function() {
                 introOverlay.style.display = 'none';
                 
-                // Initialize background instrumental parameters safely
+                // Initialize background loops safely
                 audioSeaweed.volume = 0.4;
-                audioSeaweed.play().catch(e => console.log("Audio play caught:", e));
-            }, 1200);
+                audioSeaweed.play().catch(e => console.log("Ambient lock tripped:", e));
+            }, 1200); // Matches the .fade-out CSS duration configuration
 
         }, BUBBLE_GIF_DURATION);
     });
 
     // ==========================================
-    // INTERACTIVE HITBOX LAYER: DOOR CLICK
+    // INTERACTIVE NODE MAPPING: EXTERIOR TO INTERNAL
     // ==========================================
     clickableDoor.addEventListener('click', function(event) {
-        event.preventDefault(); // Suspend default browser navigation bindings
+        event.preventDefault(); 
 
-        // Kill ambient loop mechanics immediately
+        // Flush active background ambient channels out of operational cache
         audioSeaweed.pause();
         audioSeaweed.currentTime = 0;
 
-        // Discharging sound and forcing structural layout swap
+        // Fire mechanical action audio track
         audioCreak.play();
-        doorGif.src = doorGif.src; // Enforce frame reset
+        doorGif.src = doorGif.src; // Flush transition frames straight to Frame 1
 
+        // Drop background layer elements out of current display pipeline
         exteriorView.classList.add('hidden');
         doorOverlay.classList.remove('hidden');
 
-        // Transition sequence processing to map the final scene arrival
+        // Watch cutscene animation sequence limit bounds
         setTimeout(function() {
+            // Cut overlay layer blocks
             doorOverlay.classList.add('hidden');
+            
+            // Present bedroom array layout configuration frame structures
             interiorView.classList.remove('hidden');
             interiorView.classList.add('fade-in');
 
-            // Trigger the dramatic impact sound effect right as the scene pops
+            // Fire musical hit frame audio stings
             audioDramatic.play();
             
-            // Pop the text banner up to view parameters
+            // Uncover the localized header block styling profiles
             interiorText.classList.add('show');
 
         }, DOOR_GIF_DURATION);
