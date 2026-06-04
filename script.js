@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     // RUNTIME VELOCITY CONFIGURATIONS
     const BUBBLE_GIF_DURATION = 2500; 
-    const DOOR_GIF_DURATION = 1000;   // Door opening GIF duration (1 second)
+    const DOOR_GIF_DURATION = 3000;   // 🌟 CHANGED: Door GIF now lasts 3 seconds
 
     // INTERFACE CAPTURE DOM OBJECTS
     const startScreen = document.getElementById('start-screen');
@@ -82,15 +82,15 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // ==========================================
     // INTERACTIVE NODE MAPPING: DOOR CLICK
-    // Door opening GIF plays as a layer above interior image
-    // Dramatic impact plays AFTER GIF finishes
+    // Door opening GIF plays as a layer above interior image for 3 seconds
+    // Dramatic impact plays AFTER 3-second GIF finishes
     // ==========================================
     clickableDoor.addEventListener('click', function(event) {
         event.preventDefault();
         event.stopPropagation();
         
         // Check if door is already animating to prevent multiple triggers
-        if (doorOverlay.classList.contains('visible') || interiorView.classList.contains('visible')) {
+        if (doorOverlay.classList.contains('visible') || (interiorView.classList.contains('visible') && !doorOverlay.classList.contains('hidden'))) {
             return;
         }
         
@@ -125,6 +125,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Show door overlay layer above interior image
         doorOverlay.classList.remove('hidden');
         doorOverlay.style.opacity = '0';
+        doorOverlay.style.display = 'flex';
         
         setTimeout(() => {
             doorOverlay.style.opacity = '1';
@@ -135,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function() {
         audioCreak.currentTime = 0;
         audioCreak.play().catch(e => console.log("Door creak audio error:", e));
         
-        // Set timeout for GIF duration - 1 second
+        // 🌟 Set timeout for GIF duration - NOW 3 SECONDS (3000ms)
         animationTimeout = setTimeout(function() {
             // Fade out the door overlay smoothly
             doorOverlay.style.opacity = '0';
@@ -146,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function() {
                 doorOverlay.classList.remove('visible');
                 doorOverlay.style.display = 'none';
                 
-                // CRITICAL: Dramatic impact sound plays AFTER GIF finishes
+                // 🌟 CRITICAL: Dramatic impact sound plays AFTER 3-second GIF finishes
                 audioDramatic.currentTime = 0;
                 audioDramatic.play().catch(e => console.log("Dramatic impact audio error:", e));
                 
@@ -163,9 +164,9 @@ document.addEventListener("DOMContentLoaded", function() {
                 
             }, 300);
             
-        }, DOOR_GIF_DURATION);
+        }, DOOR_GIF_DURATION); // 🌟 NOW 3000ms (3 seconds)
         
-        // Ensure cleanup if GIF takes too long to load
+        // Ensure cleanup if GIF takes too long to load (give extra buffer beyond 3 seconds)
         gifLoadTimeout = setTimeout(() => {
             if (animationTimeout) {
                 clearTimeout(animationTimeout);
@@ -184,7 +185,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     }, 1000);
                 }, 300);
             }
-        }, 1500);
+        }, 4000); // Increased fallback timeout to 4 seconds (longer than 3-second GIF)
         
         // Store timeouts for potential cleanup
         clickableDoor._animationTimeout = animationTimeout;
