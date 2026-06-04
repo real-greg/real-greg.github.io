@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const bubbleContainer = document.getElementById('bubble-gif-container');
     const bubbleGif = document.getElementById('bubble-gif');
     
-    const introOverlay = document.getElementById('intro-overlay');
     const exteriorView = document.getElementById('exterior-view');
     const doorOverlay = document.getElementById('door-transition-overlay');
     const doorGif = document.getElementById('door-gif');
@@ -23,36 +22,39 @@ document.addEventListener("DOMContentLoaded", function() {
     const audioCreak = document.getElementById('audio-creak');
     const audioDramatic = document.getElementById('audio-dramatic');
 
+    // Make sure bubble container is hidden at absolute load so it doesn't leak through white screen
+    bubbleContainer.style.display = 'none';
+
     // ==========================================
-    // ACTION INITIALIZER: TAP TO COMPLY WITH SECURITY
+    // ACTION INITIALIZER: CLICK ENTER
     // ==========================================
     startBtn.addEventListener('click', function() {
-        // Drop the curtain screen
+        // 1. Drop the white curtain screen instantly.
+        // The island is already standing perfectly still beneath it!
         startScreen.style.display = 'none';
         
-        // REVEAL BOTH SIMULTANEOUSLY: Island image background + transparent bubble GIF canvas on top
-        exteriorView.classList.remove('hidden'); 
-        bubbleContainer.classList.remove('hidden');
+        // 2. Turn on the bubble overlay container right away over the static island
+        bubbleContainer.style.display = 'flex';
         
-        // Wake sound layer instantly synced to bubble visual layout
+        // 3. Play bubble audio sound effect
         audioBubble.play();
 
-        // Flush frame caching loops to start GIF processing on absolute frame 0
+        // 4. Flush frame caching loops to start GIF processing on absolute frame 0
         bubbleGif.src = bubbleGif.src; 
 
-        // Monitor run cycle to drop bubbles when asset timeline wraps up
+        // 5. Wait for bubble animation runtime to conclude
         setTimeout(function() {
-            // Initiate fade out pipeline matching layout variables
-            introOverlay.classList.add('fade-out');
+            // Fade out ONLY the bubble overlay container over 1 second smoothly
+            bubbleContainer.classList.add('fade-out');
 
-            // Purge layer nodes to establish runtime memory management
             setTimeout(function() {
-                introOverlay.style.display = 'none';
+                // Completely hide bubble code when transparency animation concludes
+                bubbleContainer.style.display = 'none';
                 
-                // Initialize background loops safely
+                // Spin up background audio tracks safely
                 audioSeaweed.volume = 0.4;
-                audioSeaweed.play().catch(e => console.log("Ambient lock tripped:", e));
-            }, 1200); // Matches the .fade-out CSS duration configuration
+                audioSeaweed.play().catch(e => console.log("Ambient audio lock caught:", e));
+            }, 1000); // Matches the 1.0s .fade-out CSS duration
 
         }, BUBBLE_GIF_DURATION);
     });
@@ -67,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function() {
         audioSeaweed.pause();
         audioSeaweed.currentTime = 0;
 
-        // Fire mechanical action audio track
+        // Fire mechanical action door creak track
         audioCreak.play();
         doorGif.src = doorGif.src; // Flush transition frames straight to Frame 1
 
