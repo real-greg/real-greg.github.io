@@ -9,22 +9,21 @@
 </head>
 <body>
 
-    <div id="intro-overlay">
-        <div id="start-screen">
-            <button id="start-btn">ENTER</button>
-        </div>
-        
-        <div id="bubble-gif-container" class="hidden">
-            <img src="./image_24e6d6.gif" id="bubble-gif" alt="Bubbles rising">
-        </div>
+    <div id="start-screen">
+        <button id="start-btn">ENTER</button>
     </div>
 
-    <div id="exterior-view" class="main-container hidden">
+    <div id="exterior-view" class="main-container">
+        
+        <div id="bubble-gif-container">
+            <img src="./image_24e6d6.gif" id="bubble-gif" alt="Bubbles rising">
+        </div>
+
         <a href="#" id="clickable-door" aria-label="Enter the building"></a>
     </div>
 
     <div id="door-transition-overlay" class="hidden">
-        <img src="./door_opening.gif" id="door-gif" alt="The door swings open">
+        <img src="./door_opening.gif" id="door-gif" alt="The door opens">
     </div>
 
     <div id="interior-view" class="main-container hidden">
