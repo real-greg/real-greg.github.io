@@ -77,8 +77,6 @@ document.addEventListener("DOMContentLoaded", function() {
             // Trigger the dramatic impact sting sound
             audioDramatic.play();
             
-            // Pop the red "COME HERE" text overlay into view
-            interiorText.classList.add('show');
 
         }, DOOR_GIF_DURATION);
     });
