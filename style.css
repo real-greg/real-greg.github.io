@@ -1,55 +1,51 @@
-/* VIEWPORT INITIALIZATION & RESET */
-body, html {
+* {
     margin: 0;
     padding: 0;
-    width: 100vw;
-    height: 100vh;
-    overflow: hidden; 
-    background-color: #000000;
-    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+    user-select: none;
 }
 
-/* MASTER UTILITY SCHEMAS */
+body, html {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000000;
+    font-family: 'Special Gothic Condensed One', sans-serif;
+}
+
 .hidden {
     display: none !important;
 }
 
-.fade-in {
-    animation: sceneFadeIn 1.5s ease-out forwards;
-}
-
-.fade-out {
-    animation: bubbleFadeOut 1.0s ease-in forwards;
-}
-
 .main-container {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100vw;
     height: 100vh;
     background-size: cover;
     background-position: center;
-    position: absolute;
-    top: 0;
-    left: 0;
+    background-repeat: no-repeat;
 }
 
-/* ==========================================
-   PHASE 1: GATEWAY CLICK SCREEN
-   ========================================== */
 #start-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    background-image: url('./image_12345.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #ffffff; 
-    z-index: 1010;
+    z-index: 2000;
 }
 
 #start-btn {
-    font-family: 'Special Gothic Condensed One', Arial, sans-serif;
+    font-family: 'Special Gothic Condensed One', sans-serif;
     font-size: 5rem;
     padding: 12px 40px;
     color: #ffffff;
@@ -59,6 +55,9 @@ body, html {
     cursor: pointer;
     box-shadow: 0 8px 16px rgba(0,0,0,0.25);
     transition: transform 0.15s ease, background-color 0.15s ease;
+    letter-spacing: 2px;
+    z-index: 2001;
+    position: relative;
 }
 
 #start-btn:hover {
@@ -66,35 +65,38 @@ body, html {
     background-color: #0088ee;
 }
 
-/* ==========================================
-   PHASE 2: EXTERIOR ISLAND & BUBBLE LAYER
-   ========================================== */
+.back-btn {
+    position: fixed;
+    top: 24px;
+    left: 24px;
+    font-family: 'Special Gothic Condensed One', sans-serif;
+    font-size: 1.8rem;
+    padding: 8px 28px;
+    color: #ffffff;
+    background-color: #00a2ff;
+    border: 3px solid #0044aa;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+    transition: transform 0.15s ease, background-color 0.15s ease;
+    letter-spacing: 1.5px;
+    z-index: 2100;
+    font-weight: bold;
+    backdrop-filter: blur(2px);
+}
+
+.back-btn:hover {
+    transform: scale(1.06);
+    background-color: #0088ee;
+}
+
 #exterior-view {
     background-image: url('./image_24f23d.png');
-    background-size: cover;
-    background-position: center;
-    z-index: 1; 
-}
-
-#bubble-gif-container {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: transparent !important; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 10; 
-    pointer-events: none;
-}
-
-#bubble-gif {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    mix-blend-mode: screen; /* Drops black background */
+    z-index: 1;
+    opacity: 1 !important;
+    transition: none !important;
+    animation: none !important;
+    visibility: visible !important;
 }
 
 #clickable-door {
@@ -104,26 +106,35 @@ body, html {
     width: 13%;
     height: 38%;
     background-color: transparent;
-    z-index: 50; 
-    cursor: pointer; 
-    outline: none;
+    z-index: 60;
+    cursor: pointer;
 }
 
-#clickable-door:hover {
-    cursor: pointer; 
+#bubble-gif-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 3000;
+    pointer-events: none;
 }
 
-/* ==========================================
-   PHASE 3: BEDROOM & RENDERING RULES
-   ========================================== */
+#bubble-gif {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 #interior-view {
     background-image: url('./image_241cfb.jpg');
-    background-size: cover;
-    background-position: center;
     z-index: 5;
 }
 
-/* DOOR OPENING OVERLAY OVER THE BEDROOM */
 #door-transition-overlay {
     position: absolute;
     top: 0;
@@ -134,7 +145,7 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 20;
+    z-index: 25;
     pointer-events: none;
 }
 
@@ -145,48 +156,21 @@ body, html {
     mix-blend-mode: screen;
 }
 
-#interior-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.3);
-    font-family: 'Jolly Lodger', cursive;
-    color: #ff0000;
-    font-size: 9rem;
-    font-weight: bold;
-    text-align: center;
-    letter-spacing: 2px;
-    text-shadow: 4px 4px 0px #000000, -2px -2px 0px #000000, 2px -2px 0px #000000, -2px 2px 0px #000000;
-    opacity: 0;
-    z-index: 60;
-    pointer-events: none;
-}
-
-#interior-text.show {
-    animation: textImpactPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-    animation-delay: 0.1s;
-}
-
-/* ==========================================
-   ANIMATION KEYFRAME ROUTINES
-   ========================================== */
-@keyframes sceneFadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes bubbleFadeOut {
-    from { opacity: 1; }
-    to { opacity: 0; }
-}
-
-@keyframes textImpactPop {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.3);
+@media (max-width: 768px) {
+    #clickable-door {
+        top: 22%;
+        left: 30%;
+        width: 18%;
+        height: 35%;
     }
-    100% {
-        opacity: 1;
-        transform: translate(-50%, -50%) scale(1.0);
+    .back-btn {
+        font-size: 1.2rem;
+        padding: 6px 18px;
+        top: 16px;
+        left: 16px;
+    }
+    #start-btn {
+        font-size: 3rem;
+        padding: 8px 30px;
     }
 }
