@@ -2,86 +2,39 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SpongeBob SquarePants Interactive Experience</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Lil. St. James Experience — Echo Chamber</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Jolly+Lodger&display=swap" rel="stylesheet">
-    <style>
-        /* Additional inline styles to ensure proper layering and transitions */
-        #exterior-view {
-            opacity: 0;
-            transition: opacity 1.5s ease-out;
-        }
-        
-        #exterior-view.visible {
-            opacity: 1;
-        }
-        
-        #bubble-gif-container {
-            opacity: 0;
-            transition: opacity 0.5s ease-out;
-        }
-        
-        #bubble-gif-container.visible {
-            opacity: 1;
-        }
-        
-        #door-transition-overlay {
-            opacity: 0;
-            transition: opacity 0.3s ease-out;
-        }
-        
-        #door-transition-overlay.visible {
-            opacity: 1;
-        }
-        
-        #interior-view {
-            opacity: 0;
-            transition: opacity 1s ease-out;
-        }
-        
-        #interior-view.visible {
-            opacity: 1;
-        }
-        
-        /* Ensure proper z-index layering */
-        .main-container {
-            transition: opacity 0.5s ease-out;
-        }
-        
-        #interior-text {
-            z-index: 100;
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Special+Gothic+Condensed+One&family=Jolly+Lodger&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div id="start-screen">
-        <button id="start-btn">ENTER</button>
+        <button id="start-btn">BEGIN</button>
     </div>
 
     <div id="exterior-view" class="main-container">
-        
-        <div id="bubble-gif-container">
-            <img src="./image_24e6d6.gif" id="bubble-gif" alt="Bubbles rising">
-        </div>
-
         <a href="#" id="clickable-door" aria-label="Enter the building"></a>
     </div>
 
+    <div id="bubble-gif-container" class="hidden">
+        <img src="./image_24e6d6.gif" id="bubble-gif" alt="Bubbles rising">
+    </div>
+
     <div id="interior-view" class="main-container hidden">
-        
         <div id="door-transition-overlay" class="hidden">
             <img src="./door_opening.gif" id="door-gif" alt="The door opens">
         </div>
-
-        <div id="interior-text">COME HERE</div>
     </div>
 
-    <audio id="audio-bubble" src="audio/bubble_sfx.mp3" preload="auto"></audio>
+    <button id="back-btn" class="back-btn hidden">BACK</button>
+
+    <audio id="audio-street-rag" src="audio/street_rag.mp3" preload="auto" loop></audio>
     <audio id="audio-seaweed" src="audio/seaweed_bg.mp3" preload="auto" loop></audio>
+    <audio id="audio-bubble" src="audio/bubble_sfx.mp3" preload="auto"></audio>
     <audio id="audio-creak" src="audio/door_creak.mp3" preload="auto"></audio>
     <audio id="audio-dramatic" src="audio/dramatic_impact.mp3" preload="auto"></audio>
+    <audio id="audio-wooden-bear" src="audio/wooden_bear.mp3" preload="auto" loop></audio>
 
     <script src="script.js"></script>
 </body>
